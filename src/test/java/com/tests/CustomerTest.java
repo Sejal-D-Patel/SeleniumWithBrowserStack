@@ -15,7 +15,6 @@ public class CustomerTest extends BrowserStackBaseTest {
 
 		return new Object[][] { { Utility.getdata(0, 7, 2) }, { Utility.getdata(0, 7, 3) }, { Utility.getdata(0, 7, 4) },
 				{ Utility.getdata(0, 7, 5) } };
-
 	}
 
 	@Test(priority = 1, dataProvider = "FullNameValidation")
