@@ -10,14 +10,14 @@ public class CustomerTest extends BrowserStackBaseTest {
 		driver.get(getProperty("URL"));
 		Utility.waitForPageCompletelyLoaded(driver);
 	}
-	@DataProvider(name = "FullNameValidation")
+/*	@DataProvider(name = "FullNameValidation")
 	public static Object[][] lessThan5CharactersOfFullName() {
 
 		return new Object[][] { { Utility.getdata(0, 7, 2) }, { Utility.getdata(0, 7, 3) }, { Utility.getdata(0, 7, 4) },
 				{ Utility.getdata(0, 7, 5) } };
-	}
+	}*/
 
-	@Test(priority = 1, dataProvider = "lessThan5CharactersOfFullName")
+	@Test(priority = 1)
 	public void checkInventoryItemTest() throws InterruptedException {
 		doLogin();
 		System.out.println(driver.getTitle());
