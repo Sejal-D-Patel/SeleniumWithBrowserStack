@@ -11,13 +11,13 @@ public class CustomerTest extends BrowserStackBaseTest {
 		Utility.waitForPageCompletelyLoaded(driver);
 	}
 	@DataProvider(name = "FullNameValidation")
-	public static Object[][] lessThan5CharectersOfFullName() {
+	public static Object[][] lessThan5CharactersOfFullName() {
 
 		return new Object[][] { { Utility.getdata(0, 7, 2) }, { Utility.getdata(0, 7, 3) }, { Utility.getdata(0, 7, 4) },
 				{ Utility.getdata(0, 7, 5) } };
 	}
 
-	@Test(priority = 1, dataProvider = "FullNameValidation")
+	@Test(priority = 1, dataProvider = "lessThan5CharactersOfFullName")
 	public void checkInventoryItemTest() throws InterruptedException {
 		doLogin();
 		System.out.println(driver.getTitle());
