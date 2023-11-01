@@ -69,6 +69,7 @@ public class BrowserStackBaseTest {
 		try {
 			driver = new RemoteWebDriver(new URL(URL), caps);
 			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}

@@ -3,9 +3,7 @@ package com.utilities;
 import com.drivermanager.BrowserStackBaseTest;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -53,13 +51,7 @@ public class Utility extends BrowserStackBaseTest {
             e.printStackTrace();
         }
     }
-    /**
-     * Click on element
-     * @param element
-     */
-    public static void clickOnElement(WebElement element) {
-        element.click();
-    }
+
 
     /**
      * Send key
@@ -68,8 +60,9 @@ public class Utility extends BrowserStackBaseTest {
      * @param value
      */
     public static void sendKey(WebElement element, String value) {
-        element.clear();
+        element.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
         element.sendKeys(value);
+        pause(2);
     }
 
     /**
@@ -86,7 +79,23 @@ public class Utility extends BrowserStackBaseTest {
             wait.until(ExpectedConditions.visibilityOf(webElement));
             return true;
         } catch (Exception e) {
-            System.out.println("Can not wait till element visible"+e.getMessage());
+            return false;
+        }
+    }
+    /**
+     * Wait for element visible
+     *
+     * @param webElement
+     * @param driver
+     * @return
+     */
+    public static boolean waitForVisibilityOfElementLocated(WebElement webElement, WebDriver driver) {
+        long timeOutSecond = 60;
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, timeOutSecond);
+            wait.until(ExpectedConditions.visibilityOfElementLocated((By) webElement));
+            return true;
+        } catch (Exception e) {
             return false;
         }
     }
@@ -101,8 +110,16 @@ public class Utility extends BrowserStackBaseTest {
             new WebDriverWait(driver, explicitWaitDefault)
                     .until(ExpectedConditions.elementToBeClickable(element));
         } catch (Exception e) {
-            System.out.println("Can not wait till element click");
         }
+    }
+    /**
+     * Click on element
+     * @param element
+     */
+    public static void clickOnElement(WebElement element,WebDriver driver) {
+        waitForVisibilityOfElement(element,driver);
+        waitForElementTobeClickable(element,driver);
+        element.click();
     }
     /**
      * select value from dropdown/selectBox by value
@@ -120,11 +137,23 @@ public class Utility extends BrowserStackBaseTest {
             Assert.fail("Unable to select the required index from the dropdown menu, Exception: " + e.getMessage());
         }
     }
+    /**
+     * get Selected value
+     *
+     * @param element
+     *
+     */
+    public static String selectedValue(WebElement element) {
+        Select select = new Select(element);
+        String selectedState = select.getFirstSelectedOption().getText();
+        return selectedState;
+    }
 
     /**
      * waitForPageCompletelyLoaded
      */
     public static void waitForPageCompletelyLoaded(WebDriver driver) {
+        pause(3);
         JavascriptExecutor j = (JavascriptExecutor) driver;
         if (j.executeScript("return document.readyState").toString().equals("complete")) {
             System.out.println("Page has loaded");

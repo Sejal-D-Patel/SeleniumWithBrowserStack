@@ -4,17 +4,6 @@
 <suite name="BrowserStack Test automtion regression suite"
 	thread-count="3" parallel="tests" verbose="3">
 
-	<test name="BrowserStack Test - FF">
-		<classes>
-			<class name="com.tests.CustomerTest" />
-			<parameter name="os" value="Windows" />
-			<parameter name="os_version" value="11" />
-			<parameter name="browser" value="Firefox" />
-			<parameter name="browser_version" value="latest-beta" />
-		</classes>
-
-	</test>
-
 	<test name="BrowserStack Test - Chrome">
 		<classes>
 			<class name="com.tests.CustomerTest" />
@@ -25,7 +14,16 @@
 		</classes>
 
 	</test>
+	<test name="BrowserStack Test - FF">
+		<classes>
+			<class name="com.tests.CustomerTest" />
+			<parameter name="os" value="Windows" />
+			<parameter name="os_version" value="11" />
+			<parameter name="browser" value="Firefox" />
+			<parameter name="browser_version" value="latest-beta" />
+		</classes>
 
+	</test>
 	<test name="BrowserStack Test - Edge">
 		<classes>
 			<class name="com.tests.CustomerTest" />
